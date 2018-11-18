@@ -1,0 +1,16 @@
+---
+server:
+  port: ${SERVER_PORT:0}  
+#Eureka Service registry Configuration        
+eureka:
+  client:    
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+      # The default 'instance id' won't be unique if running on the same host and using 'server.port=0'
+      # By Default, The default application name (that is, the service ID), 
+      # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
+      instance-id: ${spring.application.name}:${random.int[1,99]}
+      hostname: localhost

@@ -1,0 +1,39 @@
+---
+#Using the same key as used in server side for doing a client side decryption      
+#use the ENCRYPT_KEY environment variable to keep it out of plain-text configuration files
+encrypt:
+  key: ${ENCRYPT_KEY}
+spring:
+  rabbitmq: #Using RabbitMQ for Spring cloud bus. This config has to be first in the bootstrap.yml
+    host: ${RABBITMQ_HOST:192.168.99.100} #RabbitMQ running as docker container
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: toll-rate-service
+  profiles:
+    active:
+    - dev  
+  cloud:      
+    config:
+      enabled: false
+      username: admin #Basic Auth Credentials
+      password: password     
+      fail-fast: true #Config Client Fail Fast
+      retry: #Config Client Retry
+        initial-interval: 2000
+        max-attempts: 6
+        max-interval: 2000
+        multiplier: 1.5
+      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/} #The uri at which spring cloud config server is running
+# The above config will pick s2rates-dev.properties file from cloud config server since it follows
+# the convention as {spring.application.name}/{profile}/label
+
+#Enables all Actuator endpoints meant for monitoring, 
+#e.g: localhost:8181/spring-cloud-config-client/actuator/metrics
+#Exposing 17 endpoint(s) beneath base path '/actuator' - See for this message in logs after applilcation start up to ensure actuator is enabled
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

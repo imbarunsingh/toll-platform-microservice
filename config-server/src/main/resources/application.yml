@@ -1,0 +1,12 @@
+---
+server:
+  port: ${SERVER_PORT:9090}
+  servlet:
+    context-path: ${CONTEXT_PATH:/config-server} 
+  
+#Basic Authentication Set Up Spring Security
+spring:
+  security:
+    user:
+      name: admin
+      password: password

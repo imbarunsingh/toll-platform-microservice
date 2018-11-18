@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Client app for consuming config server properties</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<h1>Spring Cloud Config Client:</h1>
+			<p th:text="'Your rate is: ' + ${rateAmount} + ' ,Number of lanes is: ' + ${laneCount} + ' ,Toll start time is: ' 
+			  + ${tollStart} + ', Deccrypted Connection String: '+ ${connString}"/>		    
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</body>
+</html>

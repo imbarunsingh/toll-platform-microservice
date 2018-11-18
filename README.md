@@ -1,2 +1,2 @@
-# toll-system-microservice
-Microservice sample project for online toll system
+# microservice-samples
+Microservices sample project

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: eureka-server
+  cloud:
+    config:
+      discovery:
+        enabled: false   
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0  
+  datacenter: Bangalore
+  environment: Development
+     
