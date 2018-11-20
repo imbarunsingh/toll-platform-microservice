@@ -1,10 +1,10 @@
 spring:
   application:
-    name: eureka-server
+    name: discovery-service
   cloud:
     config:
       discovery:
-        enabled: false   
+        enabled: false
 eureka:
   client:
     registerWithEureka: false

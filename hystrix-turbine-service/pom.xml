@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.microservice</groupId>
-	<artifactId>toll-system-web</artifactId>
+	<artifactId>hystrix-turbine-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Toll System Web</name>
+	<name>Hystrix Turbine</name>
 	<description>Client app for consuming properties from Spring Cloud config server </description>
 
 	<parent>
@@ -23,18 +23,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
+		<hystrix.version>1.4.4.RELEASE</hystrix.version>
 	</properties>
 
-	<dependencies>		
-		<!-- Dependency for Spring REST Endpoints -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
+	<dependencies>
 		<!-- Dependency for Spring cloud config clients -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -75,6 +67,19 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Dependency for creating a Hystrix Turbine System -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-turbine-stream</artifactId>
+			<version>${hystrix.version}</version>
+		</dependency>
+		<!-- RabbitMQ stream dependency for collecting Hystrix stream by turbine stream from all 
+			services -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -96,7 +101,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>toll-system-web</finalName>
+		<finalName>hystrix-turbine-service</finalName>
 	</build>
 
 	<repositories>

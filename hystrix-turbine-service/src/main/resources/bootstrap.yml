@@ -10,7 +10,7 @@ spring:
     username: guest
     password: guest
   application:
-    name: toll-system-web
+    name: hystrix-turbine-service
   profiles:
     active:
     - dev  

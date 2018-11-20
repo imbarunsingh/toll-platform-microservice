@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.microservice</groupId>
-	<artifactId>eureka-server</artifactId>
+	<groupId>com.microservice</groupId>
+	<artifactId>hystrix-dashboard-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Eureka Server</name>
-	<description>Eureka Server for service discovery</description>
+	<name>Hystrix Dashboard</name>
+	<description>Client app for consuming properties from Spring Cloud config server </description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -20,31 +20,59 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>com.microservice.Application</start-class>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<docker.image.prefix>springcloud</docker.image.prefix>
 		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
+		<hystrix.version>1.4.4.RELEASE</hystrix.version>
 	</properties>
 
 	<dependencies>
+		<!-- Dependency for Spring cloud config clients -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>		
-		<!-- Dependency to enable actuator endpoints on the service -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Dependency to enable actuator endpoints on the service -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- Dependency for Config Client Retry -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+		<!-- Spring Cloud Bus dependency for auto refresh of config from cloud 
+			config server -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+		<!-- Dependency for registering the service with Eureka Server -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Dependency for creating a Hystrix dashboard -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+			<version>${hystrix.version}</version>
+		</dependency>		
 	</dependencies>
 
 	<dependencyManagement>
@@ -64,30 +92,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<!-- defined in spring-cloud-starter-parent pom (as documentation hint), 
-					but needs to be repeated here -->
-				<configuration>
-					<requiresUnpack>
-						<dependency>
-							<groupId>com.netflix.eureka</groupId>
-							<artifactId>eureka-core</artifactId>
-						</dependency>
-						<dependency>
-							<groupId>com.netflix.eureka</groupId>
-							<artifactId>eureka-client</artifactId>
-						</dependency>
-					</requiresUnpack>
-				</configuration>
-			</plugin>
-			<plugin>
-				<!--skip deploy (this is just a test module) -->
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>hystrix-dashboard-service</finalName>
 	</build>
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
@@ -98,6 +107,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 
 </project>
