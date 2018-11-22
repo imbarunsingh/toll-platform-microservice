@@ -14,3 +14,9 @@ eureka:
       # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
       instance-id: ${spring.application.name}:${random.int[1,99]}
       hostname: localhost
+ribbon:
+  eureka:
+    enabled: true
+    
+    
+  
