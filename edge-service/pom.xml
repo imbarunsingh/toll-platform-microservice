@@ -76,6 +76,11 @@
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 			<version>${zuul.version}</version>
 		</dependency>
+		<!-- Dependency for distributed log tracing -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

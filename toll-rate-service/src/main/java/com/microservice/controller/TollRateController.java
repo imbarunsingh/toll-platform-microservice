@@ -23,7 +23,7 @@ public class TollRateController {
 	@Autowired
 	private TollRateService tollRateService;
 
-	@GetMapping("/	toll-charges/{stationId}")
+	@GetMapping("/toll-charges/{stationId}")
 	public TollRate getTollCharges(@PathVariable int stationId) {
 		logger.info("Getting the Toll Charges for the stationId: {}", stationId);
 		return tollRateService.getTollRate(stationId);

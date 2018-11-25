@@ -83,7 +83,7 @@
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 			<version>${cloud-starter-hystrix.version}</version>
 		</dependency>
-		<!-- Dependency for putting Hystrix stream on RabbitMQ queue -->
+		<!-- Dependency for putting Hystrix stream on RabbitMQ queue and can be shown on Hystrix dashboard-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-hystrix-stream</artifactId>			
@@ -93,7 +93,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
-
+		<!-- Dependency for distributed log tracing -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

@@ -79,7 +79,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
-
+		<!-- Dependency for distributed log tracing -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

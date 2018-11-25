@@ -10,3 +10,9 @@ spring:
     user:
       name: admin
       password: password
+#For Distributed Tracing using Spring Cloud Sleuth
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.sleuth: DEBUG
+    com.microservice: DEBUG

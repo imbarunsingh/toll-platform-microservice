@@ -31,6 +31,13 @@ zuul:
       stripPrefix: false
   ignored-patterns:
     "/toll-system/toll-rate/admin" # Does allow this path to be accessed.
+
+#For Distributed Tracing using Spring Cloud Sleuth
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.sleuth: DEBUG
+    com.microservice: DEBUG
     
     
   

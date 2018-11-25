@@ -16,7 +16,7 @@ spring:
     - dev  
   cloud:      
     config:
-      enabled: false
+      enabled: true
       username: admin #Basic Auth Credentials
       password: password     
       fail-fast: true #Config Client Fail Fast

@@ -72,7 +72,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 			<version>${hystrix.version}</version>
-		</dependency>		
+		</dependency>
+		<!-- Dependency for distributed log tracing -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

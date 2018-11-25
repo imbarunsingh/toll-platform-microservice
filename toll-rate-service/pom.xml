@@ -25,7 +25,7 @@
 		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
 	</properties>
 
-	<dependencies>		
+	<dependencies>
 		<!-- Dependency for Spring REST Endpoints -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,6 +71,12 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Dependency for distributed log tracing -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

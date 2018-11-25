@@ -4,19 +4,24 @@ import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
 public class PreFilter extends ZuulFilter {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PreFilter.class);
 
 	@Override
 	public Object run() throws ZuulException {
-		System.out.println("Inside Pre Filter");
+		logger.info("Inside Pre Filter");
 		RequestContext ctx = RequestContext.getCurrentContext();
 	    HttpServletRequest request = ctx.getRequest();
 	 
-	    System.out.println("Request Method : " + request.getMethod() + " Request URL : " + request.getRequestURL().toString());
+	    logger.info("Request Method : " + request.getMethod() + " Request URL : " + request.getRequestURL().toString());
 		return null;
 	}
 

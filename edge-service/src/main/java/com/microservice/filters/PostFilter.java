@@ -2,16 +2,21 @@ package com.microservice.filters;
 
 import static com.netflix.zuul.context.RequestContext.getCurrentContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
 public class PostFilter extends ZuulFilter {
+	
+	private static final Logger logger = LoggerFactory.getLogger(PostFilter.class);
 
 	@Override
 	public Object run() throws ZuulException {	
 	 
-	    System.out.println("Inside Post Filter");
+		logger.info("Inside Post Filter");
 		return null;
 	}
 	
