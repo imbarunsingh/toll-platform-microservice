@@ -1,16 +1,50 @@
+---
 spring:
-  application:
-    name: discovery-service
+  profiles: development
   cloud:
-    config:
-      discovery:
-        enabled: false
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-  server:
-    waitTimeInMsWhenSyncEmpty: 0  
-  datacenter: Bangalore
-  environment: Development
-     
+    config: 
+      name: discovery-service #is basically the spring.application.name.This is how the Config Server will know which set of configuration to send to a specific client
+      enabled: true
+      username: admin #Basic Auth Credentials
+      password: password     
+      fail-fast: true #Config Client Fail Fast
+      retry: #Config Client Retry
+        initial-interval: 1200
+        max-attempts: 3
+        max-interval: 1000
+        multiplier: 1.5
+      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/} #The uri at which spring cloud config server is running
+# The above config will pick s2rates-dev.properties file from cloud config server since it follows
+# the convention as {spring.application.name}/{profile}/label      
+---
+spring:
+  profiles: staging
+  cloud:
+    config: 
+      name: discovery-service #is basically the spring.application.name
+      enabled: true
+      username: admin #Basic Auth Credentials
+      password: password     
+      fail-fast: true #Config Client Fail Fast
+      retry: #Config Client Retry
+        initial-interval: 1200
+        max-attempts: 3
+        max-interval: 1000
+        multiplier: 1.5
+      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}
+---
+spring:
+  profiles: production
+  cloud:
+    config: 
+      name: discovery-service #is basically the spring.application.name
+      enabled: true
+      username: admin #Basic Auth Credentials
+      password: password     
+      fail-fast: true #Config Client Fail Fast
+      retry: #Config Client Retry
+        initial-interval: 2000
+        max-attempts: 6
+        max-interval: 2000
+        multiplier: 1.5
+      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}
