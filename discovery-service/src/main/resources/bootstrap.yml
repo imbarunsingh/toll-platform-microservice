@@ -1,24 +1,10 @@
 ---
+#Using the same key as used in server side for doing a client side decryption      
+#use the ENCRYPT_KEY environment variable to keep it out of plain-text configuration files
+encrypt:
+  key: ${ENCRYPT_KEY}
 spring:
-  profiles: development
-  cloud:
-    config: 
-      name: discovery-service #is basically the spring.application.name.This is how the Config Server will know which set of configuration to send to a specific client
-      enabled: true
-      username: admin #Basic Auth Credentials
-      password: password     
-      fail-fast: true #Config Client Fail Fast
-      retry: #Config Client Retry
-        initial-interval: 1200
-        max-attempts: 3
-        max-interval: 1000
-        multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/} #The uri at which spring cloud config server is running
-# The above config will pick s2rates-dev.properties file from cloud config server since it follows
-# the convention as {spring.application.name}/{profile}/label      
----
-spring:
-  profiles: staging
+  profiles: development  
   cloud:
     config: 
       name: discovery-service #is basically the spring.application.name
@@ -31,15 +17,35 @@ spring:
         max-attempts: 3
         max-interval: 1000
         multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}
+      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}    
 ---
+encrypt:
+  key: ${ENCRYPT_KEY_STAGING}
 spring:
-  profiles: production
+  profiles: staging  
   cloud:
     config: 
+      name: discovery-service
+      enabled: true
+      username: admin
+      password: password     
+      fail-fast: true #Config Client Fail Fast
+      retry: #Config Client Retry
+        initial-interval: 1200
+        max-attempts: 3
+        max-interval: 1000
+        multiplier: 1.5
+      uri: ${CONFIG_SERVER_URL_STAGING}
+---
+encrypt:
+  key: ${ENCRYPT_KEY_PRODUCTION}
+spring:
+  profiles: production  
+  cloud:
+    config:
       name: discovery-service #is basically the spring.application.name
       enabled: true
-      username: admin #Basic Auth Credentials
+      username: admin 
       password: password     
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
@@ -47,4 +53,4 @@ spring:
         max-attempts: 6
         max-interval: 2000
         multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}
+      uri: ${CONFIG_SERVER_URL_PRODUCTION}
