@@ -10,7 +10,7 @@ spring:
     username: guest
     password: guest
   application:
-    name: zuul-proxy-service
+    name: edge-service
   profiles:
     active:
     - dev  

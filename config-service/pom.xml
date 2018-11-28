@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.microservice</groupId>
-	<artifactId>config-server</artifactId>
+	<artifactId>config-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>config-server</name>
+	<name>config-service</name>
 	<description>Git based Spring Cloud config server </description>
 
 	<parent>
@@ -63,6 +63,26 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
+		<!-- Dependency for Config Client Retry -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+		 <!-- Dependency for registering the service with Eureka Server -->
+		<!-- <dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<scope>test</scope>
+		</dependency>  -->
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -85,7 +105,7 @@
 			</plugin>
 
 		</plugins>
-		<finalName>config-server</finalName>
+		<finalName>config-service</finalName>
 	</build>
 	<repositories>
 		<repository>

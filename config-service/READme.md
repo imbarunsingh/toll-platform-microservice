@@ -1,4 +1,8 @@
 #Git Based config Server
+#Asymmetric Encryption/decrption
+Generate a keystore:
+keytool -genkeypair -alias config-server-key -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -dname "CN=Config Server,OU=Spring Cloud,O=Toll System" -keypass my-k34-s3cr3t -keystore config-server.jks -storepass my-k34-s3cr3t -validity 365
+
 
 #NOTE : Prefer to use bootstrap.yml for spring cloud project
 bootstrap.yml is loaded before application.yml.
