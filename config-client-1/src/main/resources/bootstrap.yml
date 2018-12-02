@@ -17,7 +17,7 @@ spring:
   cloud:      
     config: 
       username: admin #Basic Auth Credentials
-      password: password     
+      password: password           
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
         initial-interval: 2000

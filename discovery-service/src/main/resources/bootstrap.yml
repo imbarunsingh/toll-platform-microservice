@@ -1,56 +1,18 @@
----
-#Using the same key as used in server side for doing a client side decryption      
-#use the ENCRYPT_KEY environment variable to keep it out of plain-text configuration files
-encrypt:
-  key: ${ENCRYPT_KEY}
+ #Using the Asymmetric server side encryption & decryption
 spring:
-  profiles: development  
+  profiles:
+    active : ${SPRING_PROFILES_ACTIVE:default}   
+  application:
+    name: discovery-service
   cloud:
-    config: 
-      name: discovery-service #is basically the spring.application.name
-      enabled: true
+    config:      
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:9090/config-server/}
+      label: ${SPRING_CLOUD_CONFIG_LABEL:master}      
       username: admin #Basic Auth Credentials
-      password: password     
+      password: ${SECURITY_USER_PASSWORD:password}     
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
-        initial-interval: 1200
-        max-attempts: 3
-        max-interval: 1000
-        multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL:http://localhost:9090/config-server/}    
----
-encrypt:
-  key: ${ENCRYPT_KEY_STAGING}
-spring:
-  profiles: staging  
-  cloud:
-    config: 
-      name: discovery-service
-      enabled: true
-      username: admin
-      password: password     
-      fail-fast: true #Config Client Fail Fast
-      retry: #Config Client Retry
-        initial-interval: 1200
-        max-attempts: 3
-        max-interval: 1000
-        multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL_STAGING}
----
-encrypt:
-  key: ${ENCRYPT_KEY_PRODUCTION}
-spring:
-  profiles: production  
-  cloud:
-    config:
-      name: discovery-service #is basically the spring.application.name
-      enabled: true
-      username: admin 
-      password: password     
-      fail-fast: true #Config Client Fail Fast
-      retry: #Config Client Retry
-        initial-interval: 2000
-        max-attempts: 6
+        initial-interval: 1500
+        max-attempts: 4
         max-interval: 2000
-        multiplier: 1.5
-      uri: ${CONFIG_SERVER_URL_PRODUCTION}
+        multiplier: 1.1

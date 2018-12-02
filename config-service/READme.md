@@ -3,6 +3,9 @@
 Generate a keystore:
 keytool -genkeypair -alias config-server-key -keyalg RSA -keysize 4096 -sigalg SHA512withRSA -dname "CN=Config Server,OU=Spring Cloud,O=Toll System" -keypass my-k34-s3cr3t -keystore config-server.jks -storepass my-k34-s3cr3t -validity 365
 
+Run Jar with command line arguments:
+java -jar -Xmx1024M -Xms1024M  config-service.jar --SPRING_PROFILES_ACTIVE=production --KEYSTORE_PASSWORD=my-k34-s3cr3t --KEYSTORE_SECRET=my-k34-s3cr3t --RABBITMQ_HOST=192.168.99.100 --RABBITMQ_PORT=5672 --RABBITMQ_USERNAME=guest --RABBITMQ_PASSWORD=guest --EUREKA_DEFAULT_ZONE=http://localhost:8761/eureka/
+
 
 #NOTE : Prefer to use bootstrap.yml for spring cloud project
 bootstrap.yml is loaded before application.yml.

@@ -1,128 +1,45 @@
----
-#Development landscape configurations
-# Asymmetric Encryption key: 
+#Profile specific landscape configurations with placeholders
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  application:
+    name: config-service
+  rabbitmq: #Using RabbitMQ for Spring cloud bus. This config has to be in the bootstrap.yml
+    host: ${RABBITMQ_HOST:192.168.99.100} #RabbitMQ running as docker(image:rabbitmq:3-management) container.Command : docker run -d --hostname rabbit-mq --name spring-cloud-bus-rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+  cloud:
+    bus:
+      enabled: true
+    trace:
+        enabled: true    
+    config:
+      server:
+        monitor: 
+          github: 
+            enabled: true 
+        encrypt:
+          enabled: true #Enable server side decryption since transit security can be taken care by HTTPS   
+        git:
+          default-label: ${SPRING_CLOUD_CONFIG_LABEL:master}
+          uri: ${CLOUD_CONFIG_REPO_URL:https://github.com/imbarunsingh/toll-system-application-config.git}          
+          skip-ssl-validation: true          
+          force-pull: true
+          search-paths:
+            - 'discovery-service/**'
+            - 'edge-service/**'
+            - 'fast-pass-service/**'
+            - 'fast-pass-web/**'
+            - 'toll-rate-service/**'
+            - 'toll-rate-web/**'
+            - 'hystrix-dashboard-service/**'
+            - 'hystrix-turbine-service/**'
+#Asymmetric Encryption key: 
 #This has to be placed in bootstrap.yml file only for spring 2.0
 encrypt:
   keyStore:
     location: classpath:/config-server.jks
-    password: ${KEYSTORE_PASSWORD_DEV:my-k34-s3cr3t}
+    password: ${KEYSTORE_PASSWORD:my-k34-s3cr3t}
     alias: config-server-key
-    secret: ${KEYSTORE_SECRET_DEV:my-k34-s3cr3t}
-spring:
-  profiles: development
-  application:
-    name: config-service
-  rabbitmq: #Using RabbitMQ for Spring cloud bus. This config has to be in the bootstrap.yml
-    host: ${RABBITMQ_HOST_DEV:192.168.99.100} #RabbitMQ running as docker(image:rabbitmq:3-management) container.Command : docker run -d --hostname rabbit-mq --name spring-cloud-bus-rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management
-    port: ${RABBITMQ_PORT_DEV:5672}
-    username: ${RABBITMQ_USERNAME_DEV:guest}
-    password: ${RABBITMQ_PASSWORD_DEV:guest}
-  cloud:
-    bus:
-      enabled: true
-    trace:
-        enabled: true    
-    config:
-      server:
-        monitor: 
-          github: 
-            enabled: true 
-        encrypt:
-          enabled: false #Disable server side decryption     
-        git:
-          uri: ${GIT_REPO_URL_DEVELOPMENT:https://github.com/imbarunsingh/toll-system-application-config.git}
-          skip-ssl-validation: true          
-          force-pull: true      
-          search-paths:
-            - 'discovery-service/**'
-            - 'edge-service/**'
-            - 'fast-pass-service/**'
-            - 'fast-pass-web/**'
-            - 'toll-rate-service/**'
-            - 'toll-rate-web/**'
-            - 'hystrix-dashboard-service/**'
-            - 'hystrix-turbine-service/**'
----
-#Staging landscape configurations
-encrypt:
-  keyStore:
-    location: classpath:/config-server.jks
-    password: ${KEYSTORE_PASSWORD_STAGING:my-k34-s3cr3t}
-    alias: config-server-key
-    secret: ${KEYSTORE_SECRET_STAGING:my-k34-s3cr3t}
-spring:
-  profiles: Staging
-  application:
-    name: config-service  
-  rabbitmq:
-    host: ${RABBITMQ_CLUSTER_STAGING}
-    port: ${RABBITMQ_PORT_STAGING}
-    username: ${RABBITMQ_USERNAME_STAGING}
-    password: ${RABBITMQ_PASSWORD_STAGING} 
-  cloud:
-    bus:
-      enabled: true
-    trace:
-        enabled: true    
-    config:
-      server:
-        monitor: 
-          github: 
-            enabled: true 
-        encrypt:
-          enabled: false
-        git:
-          uri: ${GIT_REPO_URL_STAGING:https://github.com/imbarunsingh/toll-system-application-config.git}
-          skip-ssl-validation: true          
-          force-pull: true      
-          search-paths:
-            - 'discovery-service/**'
-            - 'edge-service/**'
-            - 'fast-pass-service/**'
-            - 'fast-pass-web/**'
-            - 'toll-rate-service/**'
-            - 'toll-rate-web/**'
-            - 'hystrix-dashboard-service/**'
-            - 'hystrix-turbine-service/**'
----
-#Production landscape configurations
-encrypt:
-  keyStore:
-    location: classpath:/config-server.jks
-    password: ${KEYSTORE_PASSWORD_PRODUCTION:my-k34-s3cr3t}
-    alias: config-server-key
-    secret: ${KEYSTORE_SECRET_PRODUCTION:my-k34-s3cr3t}  
-spring:
-  profiles: production
-  application:
-    name: config-service  
-  rabbitmq:
-    host: ${RABBITMQ_CLUSTER_PRODUCTION}
-    port: ${RABBITMQ_PORT_PRODUCTION}
-    username: ${RABBITMQ_USERNAME_PRODUCTION}
-    password: ${RABBITMQ_PASSWORD_PRODUCTION}
-  cloud:
-    bus:
-      enabled: true
-    trace:
-        enabled: true    
-    config:
-      server:
-        monitor: 
-          github: 
-            enabled: true 
-        encrypt:
-          enabled: false     
-        git:
-          uri: ${GIT_REPO_URL_PRODUCTION}
-          skip-ssl-validation: true          
-          force-pull: true      
-          search-paths:
-            - 'discovery-service/**'
-            - 'edge-service/**'
-            - 'fast-pass-service/**'
-            - 'fast-pass-web/**'
-            - 'toll-rate-service/**'
-            - 'toll-rate-web/**'
-            - 'hystrix-dashboard-service/**'
-            - 'hystrix-turbine-service/**'
+    secret: ${KEYSTORE_SECRET:my-k34-s3cr3t}
