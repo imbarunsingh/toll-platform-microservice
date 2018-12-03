@@ -29,9 +29,9 @@ logging:
     com.microservice: ${LOGGING_LEVEL:INFO}
   pattern:
     console: ${CONSOLE_LOG_PATTERN:%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID}){magenta} %clr(---){faint} %clr([${spring.application.name}]){blue} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
-#Actuator Endpoint config    
+#Actuator Endpoint config
 management:
   endpoints:
     web:
       exposure:
-        include: ${ACTUATOR_ENDPOINTS:health}    
+        include: ${ACTUATOR_ENDPOINTS:health,info,hystrix.stream}

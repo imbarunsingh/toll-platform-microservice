@@ -1,10 +1,34 @@
-#Hystrix Dashboard
-To run locally:
+# Spring cloud Hystrix Turbine
 
-mvn install
-java -jar target/hystrix-dashboard-service-0.0.1-SNAPSHOT.jar
-In your browser, go to http://localhost:<port>/hystrix # port configurable in application.yml
+- Dasboard module - hystrix dashboard
+- Turbine module - turbine aggregator
 
-On the home page is a form where you can enter the URL for an event stream to monitor, for example (the toll-system-web running locally): http://localhost:<port>/hystrix.stream. Any app that uses @EnableCircuitBreaker will expose the stream.
+# How to run
 
-To aggregate many streams together you can use the Turbine.
+1. Start eureka server
+   - verify that server started 
+   ```
+   http://localhost:8761/
+   ```
+1. Start client instance
+   - verify that app works 
+   ```
+   
+   App starts on a random port. Check logs for port details.
+   - verify that hystrix actuator is available    
+    ``` 
+    http://localhost:port/actuator/hystrix.stream
+    ```
+    
+1. Start hystrix dashboard
+    - verify that dashboard started
+    ```
+    http://localhost:7777/hystrix 
+    ```    
+    if you don't need to aggregate metrics from several instances just pass hystrix actuator URL from step 2 to dashboard.
+1. Start the turbine
+    -  verify that turbine stream is available
+    ``` 
+    http://localhost:8888/turbine.stream
+    ```
+    -  pass turbine stream URL to hystrix dashboard.
