@@ -23,7 +23,7 @@ spring:
           enabled: true #Enable server side decryption since transit security can be taken care by HTTPS   
         git:
           default-label: ${SPRING_CLOUD_CONFIG_LABEL:master}
-          uri: ${CLOUD_CONFIG_REPO_URL:https://github.com/imbarunsingh/toll-system-application-config.git}          
+          uri: ${CLOUD_CONFIG_REPO_URL:https://github.com/imbarunsingh/toll-platform-application-config.git}          
           skip-ssl-validation: true          
           force-pull: true
           search-paths:
