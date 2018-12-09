@@ -1,5 +1,0 @@
----
-server:
-  port: ${SERVER_PORT:9091}
-  servlet:
-    context-path: ${CONTEXT_PATH:/config-client}

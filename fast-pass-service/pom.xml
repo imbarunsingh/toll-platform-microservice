@@ -4,28 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.microservice</groupId>
-	<artifactId>fast-pass-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>fast-pass-service</artifactId>	
 	<packaging>jar</packaging>
 
 	<name>Fast Pass Service</name>
-	<description>Client app for consuming properties from Spring Cloud config server </description>
+	<description>Client app for consuming properties from Spring Cloud config server</description>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.5.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<groupId>com.tollplatform</groupId>
+		<artifactId>toll-platform</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../</relativePath>
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
-	</properties>
-
-	<dependencies>		
+	<dependencies>
 		<!-- Dependency for Spring REST Endpoints -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -36,16 +28,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Dependency to enable actuator endpoints on the service -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<!-- Dependency for Config Client Retry -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,40 +37,23 @@
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
-		<!-- Spring Cloud Bus dependency for auto refresh of config from cloud 
-			config server -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-		</dependency>
 		<!-- Dependency for registering the service with Eureka Server -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<!-- Dependency for putting Hystrix stream on RabbitMQ queue -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
 		</dependency>
-		<!-- Dependency for distributed log tracing -->
+		<!-- Dependency for RabbitMQ queue creation where the Hystrix stream data 
+			would be put -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-sleuth</artifactId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -99,16 +64,4 @@
 		</plugins>
 		<finalName>fast-pass-service</finalName>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 </project>
