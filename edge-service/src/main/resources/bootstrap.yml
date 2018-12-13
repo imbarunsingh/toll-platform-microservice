@@ -1,7 +1,7 @@
 #Using the Asymmetric server side encryption & decryption
 spring:
   profiles:
-    active : ${SPRING_PROFILES_ACTIVE:default}   
+    active : ${SPRING_PROFILES_ACTIVE:development}   
   application:
     name: edge-service
   cloud:

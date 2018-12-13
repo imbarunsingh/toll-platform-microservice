@@ -1,7 +1,7 @@
 #Profile specific landscape configurations with placeholders
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:default}
+    active: ${SPRING_PROFILES_ACTIVE:development}
   application:
     name: config-service
   rabbitmq: #Using RabbitMQ for Spring cloud bus. This config has to be in the bootstrap.yml
