@@ -29,10 +29,9 @@ spring:
           search-paths:
             - 'discovery-service/**'
             - 'edge-service/**'
-            - 'fast-pass-service/**'
-            - 'fast-pass-web/**'
+            - 'fast-pass-service/**'            
             - 'toll-rate-service/**'
-            - 'toll-rate-web/**'
+            - 'toll-platform-web/**'
             - 'hystrix-dashboard-service/**'
             - 'hystrix-turbine-service/**'
 #Asymmetric Encryption key: 

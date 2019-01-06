@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.microservice</groupId>
-	<artifactId>edge-service</artifactId>
+	<groupId>com.microservice</groupId>
+	<artifactId>toll-platform-web</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Zuul Proxy Service</name>
-	<description>Zuul proxy for Routing</description>
+	<name>Toll Platform Web</name>
+	<description>Toll Platform Web Console</description>
 
 	<parent>
 		<groupId>com.tollplatform</groupId>
@@ -17,7 +17,16 @@
 		<relativePath>../</relativePath>
 	</parent>
 
-	<dependencies>		
+	<dependencies>
+		<!-- Dependency for Spring REST Endpoints -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!-- Dependency for Spring cloud config clients -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -37,12 +46,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<!-- Dependency to configure Circuit breaker on the service that consumes 
+			another service -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zuul</artifactId>
-			<version>${cloud-starter-zuul.version}</version>
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<version>${cloud-starter-hystrix.version}</version>
 		</dependency>
-		<!-- Dependency for putting Hystrix stream on RabbitMQ queue -->
+		<!-- Dependency for putting Hystrix stream on RabbitMQ queue and can be 
+			shown on Hystrix dashboard -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-netflix-hystrix-stream</artifactId>
@@ -62,11 +74,11 @@
 			<groupId>org.springframework.security.oauth.boot</groupId>
 			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
 		</dependency>
-		<!-- To relay the access token for the Zuul proxy. -->
+		<!-- Declarative REST Client -->
 		<dependency>
-    		<groupId>org.springframework.cloud</groupId>
-    		<artifactId>spring-cloud-security</artifactId>
-		</dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>		
+		</dependency>		
 	</dependencies>
 
 	<build>
@@ -76,6 +88,5 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>config-service</finalName>
 	</build>
 </project>

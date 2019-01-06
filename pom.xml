@@ -31,10 +31,9 @@
 		<module>edge-service</module>
 		<module>hystrix-dashboard-service</module>
 		<module>hystrix-turbine-service</module>
-		<module>fast-pass-service</module>
-		<module>fast-pass-web</module>
+		<module>fast-pass-service</module>		
 		<module>toll-rate-service</module>
-		<module>toll-rate-web</module>
+		<module>toll-platform-web</module>
 	</modules>
 
 	<properties>
@@ -43,6 +42,7 @@
 		<spring-cloud.version>Finchley.SR2</spring-cloud.version>
 		<cloud-starter-hystrix.version>1.4.4.RELEASE</cloud-starter-hystrix.version>
 		<cloud-starter-zuul.version>1.4.4.RELEASE</cloud-starter-zuul.version>
+		<cloud-starter-openfeign.version>2.0.2.RELEASE</cloud-starter-openfeign.version>
 		<docker.image.prefix>toll-platform</docker.image.prefix>
 		<docker.plugin.version>0.3.258</docker.plugin.version>
 	</properties>
