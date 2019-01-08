@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.microservice.feign.client.TollRateFeignClient;
+import com.microservice.feign.client.TollRateWebFeignClient;
 import com.microservice.model.TollRate;
 
 /*You can force a bean to refresh its configuration - to pull updated values
@@ -19,14 +19,13 @@ hit the /actuator/refresh(POST) endpoint on this client to get the refresh on co
 @Controller
 @RefreshScope
 @RequestMapping("/toll-web")
-public class TollRateController {
+public class TollRateWebController {
 
-	private static final Logger logger = LoggerFactory.getLogger(TollRateController.class);
+	private static final Logger logger = LoggerFactory.getLogger(TollRateWebController.class);
 
 	@Autowired
-	private TollRateFeignClient tollRateFeignClient;
+	private TollRateWebFeignClient tollRateFeignClient;	
 	
-	//@HystrixCommand(fallbackMethod="getTollChargesFallback") // This fall back method is called when the toll-rate-service is down
 	@GetMapping(value="/charges", params= {"stationId"})	
 	public String getTollCharges(@RequestParam int stationId, Model model) {
 		

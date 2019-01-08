@@ -1,10 +1,7 @@
 package com.microservice.ribbonconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.IPing;

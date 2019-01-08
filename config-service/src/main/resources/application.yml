@@ -7,7 +7,7 @@ spring:
 server:
   port: ${SERVER_PORT:9090}
   servlet:
-    context-path: ${CONTEXT_PATH:/config-server} 
+    context-path: ${CONTEXT_PATH:/config-server}
 #Eureka Service registry Configuration     
 eureka:
   client:    
@@ -21,14 +21,16 @@ eureka:
       # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
       instance-id: ${spring.application.name}:${random.int[1,99]}
       hostname: localhost
-#For Distributed Tracing using Spring Cloud Sleuth
+#For Distributed Tracing using Spring Cloud Sleuth and log level config
 logging:
   level:
-    root: ${LOGGING_LEVEL:INFO}
-    org.springframework.cloud.sleuth: ${LOGGING_LEVEL:ERROR}
-    com.microservice: ${LOGGING_LEVEL:INFO}
+    root: ${LOG_LEVEL:INFO}
+    org.springframework.cloud.sleuth: ${LOG_LEVEL:ERROR}
+    org.springframework.boot.autoconfigure: ERROR
+    org.springframework.boot.devtools: WARN
+    com.microservice: ${LOG_LEVEL:INFO}
   pattern:
-    console: ${CONSOLE_LOG_PATTERN:%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID}){magenta} %clr(---){faint} %clr([${spring.application.name}]){blue} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+    console: ${CONSOLE_LOG_PATTERN:%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID}){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
 #Actuator Endpoint config
 management:
   endpoints:
