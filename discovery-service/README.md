@@ -1,4 +1,4 @@
-# Eureka Server Sample
+# Eureka Server
 
 Run this project as a Spring Boot app (e.g. import into IDE and run
 main method, or use "mvn spring-boot:run or gradle bootRun or ./gradlew bootRun"). It will start up on port

@@ -16,6 +16,7 @@ when using Spring Cloud Config Server, you should specify spring.application.nam
 Technically, bootstrap.yml is loaded by a parent Spring ApplicationContext. That parent ApplicationContext is loaded before the one that uses application.yml.
 
 #Refresh services with latest property changes
-curl http://admin:password@localhost:9090/config-server/monitor -d path="*" This would refresh all the config client services to see the updated value of the message property.
+curl http://admin:password@localhost:9090/config-server/monitor -d path="*"
+This would refresh all the config client services to see the updated value of the message property.
  
  #NOTE: More Scalable solution is : Push notification by registering a git web hook, where we would not even need to explicitly call /refresh endpoint

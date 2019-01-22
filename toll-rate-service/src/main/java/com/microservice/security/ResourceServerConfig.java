@@ -12,8 +12,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
     public void configure(HttpSecurity http) throws Exception {		
         http
-          .csrf().disable()          
-          .authorizeRequests()
+          .csrf().disable()
+          .authorizeRequests()          
           .antMatchers("/actuator/**", "/error**") // In production, ideally all endpoints should be secured
           .permitAll()          
           .anyRequest().authenticated();

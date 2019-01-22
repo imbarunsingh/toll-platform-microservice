@@ -76,6 +76,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-		<finalName>config-service</finalName>
+		<finalName>edge-service</finalName>
 	</build>
 </project>

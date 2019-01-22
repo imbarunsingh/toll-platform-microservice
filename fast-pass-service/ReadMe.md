@@ -1,3 +1,5 @@
+A backened downstrean microservice that details on customer details.
+
 #NOTE : Prefer to use bootstrap.yml for spring cloud project
 bootstrap.yml is loaded before application.yml.
 

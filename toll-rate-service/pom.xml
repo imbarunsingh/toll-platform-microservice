@@ -53,6 +53,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
+		<!-- Dependency for Authorization & Authentication using okta -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

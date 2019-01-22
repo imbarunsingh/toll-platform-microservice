@@ -15,6 +15,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
             .requestMatcher(new RequestHeaderRequestMatcher("Authorization"))
             .authorizeRequests()
-            .antMatchers("/**").authenticated();
+            .antMatchers("/**").authenticated(); //All endpoints are secured
     }
 }

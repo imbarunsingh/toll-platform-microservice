@@ -8,8 +8,8 @@ spring:
     config:      
       uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:9090/config-server/}
       label: ${SPRING_CLOUD_CONFIG_LABEL:master}      
-      username: admin #Basic Auth Credentials
-      password: ${SECURITY_USER_PASSWORD:password}
+      username: configServerUser #Basic Auth Credentials
+      password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
         initial-interval: 1500

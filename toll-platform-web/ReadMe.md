@@ -1,3 +1,5 @@
+The toll-platoform-web console which consumes the downstream services(fast-pass-service & toll-rate-service) to display online toll details.
+
 #NOTE : Prefer to use bootstrap.yml for spring cloud project
 bootstrap.yml is loaded before application.yml.
 

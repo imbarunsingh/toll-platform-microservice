@@ -43,6 +43,11 @@
 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 			<version>${cloud-starter-hystrix.version}</version>
 		</dependency>
+		<!-- Dependency for basic Auth -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
