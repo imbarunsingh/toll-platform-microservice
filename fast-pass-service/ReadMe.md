@@ -8,3 +8,9 @@ It is typically used for the following:
 when using Spring Cloud Config Server, you should specify spring.application.name and spring.cloud.config.server.git.uri inside bootstrap.yml
 some encryption/decryption information
 Technically, bootstrap.yml is loaded by a parent Spring ApplicationContext. That parent ApplicationContext is loaded before the one that uses application.yml.
+
+#DOCKER
+Run the docker image:
+docker run --hostname toll-platform-fast-pass-service -p 60a2b38f040c<Container ID>
+SSH to the container:
+docker exec -it <Container ID> /bin/bash

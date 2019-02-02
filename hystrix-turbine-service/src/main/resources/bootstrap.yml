@@ -6,8 +6,8 @@ spring:
     name: hystrix-turbine-service
   cloud:
     config:      
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://localhost:9090/config-server/}
-      label: ${SPRING_CLOUD_CONFIG_LABEL:master}      
+      uri: ${SPRING_CLOUD_CONFIG_URI:http://172.17.0.3:9090/config-server/}
+      label: ${SPRING_CLOUD_CONFIG_LABEL:docker}      
       username: configServerUser #Basic Auth Credentials
       password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
       fail-fast: true #Config Client Fail Fast

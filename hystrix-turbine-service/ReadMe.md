@@ -32,3 +32,8 @@
     http://localhost:8888/turbine.stream
     ```
     -  pass turbine stream URL to hystrix dashboard.
+#DOCKER
+Run the docker image:
+docker run --hostname toll-platform-hystrix-turbine-service -p 9092:9092 d9ec4b23b008<Container ID>
+SSH to the container:
+docker exec -it <Container ID> /bin/bash

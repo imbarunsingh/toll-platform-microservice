@@ -5,7 +5,7 @@
 
 	<groupId>com.tollplatform</groupId>
 	<artifactId>toll-platform</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>toll-platform/parent</name>
@@ -31,7 +31,7 @@
 		<module>edge-service</module>
 		<module>hystrix-dashboard-service</module>
 		<module>hystrix-turbine-service</module>
-		<module>fast-pass-service</module>		
+		<module>fast-pass-service</module>
 		<module>toll-rate-service</module>
 		<module>toll-platform-web</module>
 	</modules>
@@ -43,9 +43,28 @@
 		<cloud-starter-hystrix.version>1.4.4.RELEASE</cloud-starter-hystrix.version>
 		<cloud-starter-zuul.version>1.4.4.RELEASE</cloud-starter-zuul.version>
 		<cloud-starter-openfeign.version>2.0.2.RELEASE</cloud-starter-openfeign.version>
-		<docker.image.prefix>toll-platform</docker.image.prefix>
-		<docker.plugin.version>0.3.258</docker.plugin.version>
+		<docker.image.prefix>bsingh10</docker.image.prefix>
+		<docker.plugin.version>1.2.0</docker.plugin.version>		
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
@@ -59,7 +78,7 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>		
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -88,22 +107,40 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker.plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+					<imageTags>
+						<imageTag>${project.version}</imageTag>
+					</imageTags>
+					<dockerDirectory>${project.basedir}</dockerDirectory>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>
