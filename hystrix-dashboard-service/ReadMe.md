@@ -11,6 +11,6 @@ To aggregate many streams together you can use the Turbine Stream.
 
 #DOCKER
 Run the docker image:
-docker run --hostname toll-platform-hystrix-dashboard-service -p 9091:9091 9c2da271468c<Container ID>
+docker run -d --hostname toll-platform-hystrix-dashboard-service --name hystrix-dashboard-service -p 9091:9091 9c2da271468c<Container ID>
 SSH to the container:
 docker exec -it <Container ID> /bin/bash

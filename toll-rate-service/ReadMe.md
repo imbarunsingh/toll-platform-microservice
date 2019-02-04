@@ -11,6 +11,6 @@ Technically, bootstrap.yml is loaded by a parent Spring ApplicationContext. That
 
 #DOCKER
 Run the docker image:
-docker run --hostname toll-platform-toll-rate-service be0d83f910a1<Container ID>
+docker run -d --hostname toll-platform-toll-rate-service --name toll-rate-service be0d83f910a1<Container ID>
 SSH to the container:
 docker exec -it <Container ID> /bin/bash

@@ -18,6 +18,6 @@ generate the Docker container. The container is published in dockerhub at `sprin
 
 #DOCKER
 Run the docker image:
-docker run --hostname toll-platform-discovery-service -p 8761:8761 <Container ID>
+docker run -d --hostname toll-platform-discovery-service --name discovery-service -p 8761:8761 <Image ID>
 SSH to the container:	
 docker exec -it <Container ID> /bin/bash

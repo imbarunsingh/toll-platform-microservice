@@ -23,7 +23,7 @@ This would refresh all the config client services to see the updated value of th
  
 #DOCKER
 Run the docker image by assigning static IP:
-docker run --hostname toll-platform-config-service -p 9090:9090 <image-id>
+docker run --hostname toll-platform-config-service --name config-service -p 9090:9090 <image-id>
 SSH to the container:
 docker exec -it <Container ID> /bin/bash
  

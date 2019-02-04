@@ -29,11 +29,11 @@
 		<module>config-service</module>
 		<module>discovery-service</module>
 		<module>edge-service</module>
-		<module>hystrix-dashboard-service</module>
-		<module>hystrix-turbine-service</module>
-		<module>fast-pass-service</module>
 		<module>toll-rate-service</module>
+		<module>fast-pass-service</module>
 		<module>toll-platform-web</module>
+		<module>hystrix-dashboard-service</module>
+		<module>hystrix-turbine-service</module>		
 	</modules>
 
 	<properties>

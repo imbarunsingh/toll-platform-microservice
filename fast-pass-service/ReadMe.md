@@ -11,6 +11,6 @@ Technically, bootstrap.yml is loaded by a parent Spring ApplicationContext. That
 
 #DOCKER
 Run the docker image:
-docker run --hostname toll-platform-fast-pass-service -p 60a2b38f040c<Container ID>
+docker run -d --hostname toll-platform-fast-pass-service --name fast-pass-service -p 60a2b38f040c
 SSH to the container:
 docker exec -it <Container ID> /bin/bash

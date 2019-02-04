@@ -5,7 +5,7 @@ spring:
   application:
     name: config-service
   rabbitmq: #Using RabbitMQ for Spring cloud bus. This config has to be in the bootstrap.yml
-    host: ${RABBITMQ_HOST:172.17.0.2} #RabbitMQ running as docker(image:rabbitmq:3-management) container."IPAddress": "172.17.0.2" is the rabbitmq container ip
+    host: ${RABBITMQ_HOST:toll-platform-rabbit-mq} #RabbitMQ running as docker container. toll-platform-rabbit-mq is DNS name(hostname) for container and for the same host file entry on windows is also needed.
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:guest}
     password: ${RABBITMQ_PASSWORD:guest}
