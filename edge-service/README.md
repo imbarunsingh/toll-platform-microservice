@@ -4,6 +4,7 @@ It receives all the requests coming from the UI and then delegates the requests 
 
 #DOCKER
 Run the docker image:
-docker run --hostname toll-platform-edge-service --name edge-service -p 8080:8080 <Container ID>
+docker run --hostname toll-platform-edge-service --name edge-service -p 8080:8080 bsingh10/edge-service
+API Gateway Accessible on port 8080.
 SSH to the container:
 docker exec -it <Container ID> /bin/bash

@@ -18,6 +18,7 @@ generate the Docker container. The container is published in dockerhub at `sprin
 
 #DOCKER
 Run the docker image:
-docker run -d --hostname toll-platform-discovery-service --name discovery-service -p 8761:8761 <Image ID>
+docker run --hostname toll-platform-discovery-service --name discovery-service -p 9091:9091 bsingh10/discovery-service
+Eureka is accessible on port 9091.
 SSH to the container:	
 docker exec -it <Container ID> /bin/bash

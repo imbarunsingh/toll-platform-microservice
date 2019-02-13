@@ -12,7 +12,7 @@ spring:
       password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
-        initial-interval: 1500
-        max-attempts: 4
-        max-interval: 2000
+        initial-interval: 5000
+        max-attempts: 7
+        max-interval: 5000
         multiplier: 1.1
