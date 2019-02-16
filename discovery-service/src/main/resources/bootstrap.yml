@@ -17,6 +17,6 @@ spring:
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
         initial-interval: 2000
-        max-attempts: 10
-        max-interval: 60000
+        max-attempts: 50
+        max-interval: 100000
         multiplier: 1.5

@@ -25,7 +25,7 @@ services:
       networks:
         toll-platform-network:
           aliases:
-            - toll-platform-config-service                  
+            - toll-platform-config-service                 
     discovery-service:
       container_name: discovery-service       
       image: "bsingh10/discovery-service:${SNAPSHOT_RELEASE_VERSION?err}"

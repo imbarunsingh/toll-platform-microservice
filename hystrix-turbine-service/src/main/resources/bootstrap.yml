@@ -6,13 +6,28 @@ spring:
     name: hystrix-turbine-service
   cloud:
     config:      
-      uri: ${SPRING_CLOUD_CONFIG_URI:http://toll-platform-config-service:9090/config-server/} #toll-platform-config-service is the dns name(hostname) with ip:172.17.0.3 for config-service running as docker container
+      discovery: #Using Discovery First Bootstrap        
+        service-id: config-service
+        enabled: true      
       label: ${SPRING_CLOUD_CONFIG_LABEL:docker}    
       username: configServerUser #Basic Auth Credentials
       password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
       fail-fast: true #Config Client Fail Fast
       retry: #Config Client Retry
-        initial-interval: 5000
-        max-attempts: 7
-        max-interval: 5000
-        multiplier: 1.1
+        initial-interval: 2000
+        max-attempts: 50
+        max-interval: 100000
+        multiplier: 1.5
+#Eureka Service registry Configuration
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eurekaServerUser:${EUREKA_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}@toll-platform-discovery-service:9091/eureka/} #toll-platform-discovery-service is DNS name(hostname) for container and for the same host file entry on windows is also needed.
+  instance:
+      # The default 'instance id' won't be unique if running on the same host and using 'server.port=0'
+      # By Default, The default application name (that is, the service ID),
+      # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
+      instance-id: ${spring.application.name}:${random.value}
+      preferIpAddress: true

@@ -22,6 +22,10 @@ eureka:
       # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
       instance-id: ${spring.application.name}:${random.value}
       preferIpAddress: true
+      metadataMap:
+        user: configServerUser
+        password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
+        configPath: ${CONTEXT_PATH:/config-server}
 #For Distributed Tracing using Spring Cloud Sleuth and log level config
 logging:
   level:
