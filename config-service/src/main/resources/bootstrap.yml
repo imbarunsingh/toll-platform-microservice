@@ -8,7 +8,18 @@ spring:
     host: ${RABBITMQ_HOST:toll-platform-rabbitmq} #RabbitMQ running as docker container. toll-platform-rabbitmq is DNS name(hostname) for container and for the same host file entry on windows is also needed.
     port: ${RABBITMQ_PORT:5672}
     username: ${RABBITMQ_USERNAME:guest}
-    password: ${RABBITMQ_PASSWORD:guest}
+    password: ${RABBITMQ_PASSWORD:guest}    
+    listener:
+      direct:
+        retry:
+          enabled: true #Whether publishing retries are enabled when direct listener is used.
+      simple:
+        max-concurrency: 8 #Maximum number of listener invoker threads.
+        retry:
+          max-attempts: 3 #Maximum number of listener invoker threads.
+          enabled: true #Whether publishing retries are enabled when direct listener is used.
+    connection-timeout:
+      zero: true #Set it to zero to wait forever.
   cloud:
     bus:
       enabled: true

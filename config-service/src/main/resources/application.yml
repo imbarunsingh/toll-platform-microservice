@@ -14,13 +14,14 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eurekaServerUser:${EUREKA_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}@localhost:8761/eureka/}
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://eurekaServerUser:${EUREKA_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}@${EUREKA_HOST:toll-platform-discovery-service}:9091/eureka/}
+       #toll-platform-discovery-service is DNS name(hostname) for container and for the same host file entry on windows is also needed.
   instance:
       # The default 'instance id' won't be unique if running on the same host and using 'server.port=0'
       # By Default, The default application name (that is, the service ID), 
       # are ${spring.application.name}, and ${server.port}, respectively and is suffice for production
       instance-id: ${spring.application.name}:${random.value}
-      hostname: localhost
+      preferIpAddress: true
 #For Distributed Tracing using Spring Cloud Sleuth and log level config
 logging:
   level:

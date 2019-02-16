@@ -55,8 +55,7 @@ docker network create -d bridge toll-platform-network
 
 Run The Docker Compose :
 ------------------------
-1.docker-compose -f docker-compose-rabbitmq.yml up   -> To bring up rabbitmq instance
+1. Set the Environment Variable that the compose file would need.
+export SNAPSHOT_RELEASE_VERSION=1.0.0-SNAPSHOT (on GitBash: When you run docker-compose up with this configuration, Compose looks for the SNAPSHOT_RELEASE_VERSION environment variable in the shell and substitutes its value in. For this example, Compose resolves the image to SNAPSHOT_RELEASE_VERSION before running the configuration.)
 
-2. Set the Environment Variable that the compose file would need.
-export SNAPSHOT_RELEASE_VERSION=1.0.0-SNAPSHOT (on GitBash)
 docker-compose -f docker-compose-toll-platform-microservice.yml up  ->To run all the microservices
