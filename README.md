@@ -47,7 +47,16 @@ NOTE: In a docker set up run on windows machine, access the services listed on E
 
 
 #Docker Compose:
-Using wait-for-it.sh script.
-wait-for-it.sh is a pure bash script that will wait on the availability of a host and TCP port. It is useful for synchronizing the spin-up of interdependent services, such as linked docker containers. Since it is a pure bash script, it does not have any external dependencies.
-https://github.com/imbarunsingh/wait-for-it
+To run this application using docker compose , follow the below order:
 
+Create a new docker network:
+---------------------------
+docker network create -d bridge toll-platform-network
+
+Run The Docker Compose :
+------------------------
+1.docker-compose -f docker-compose-rabbitmq.yml up   -> To bring up rabbitmq instance
+
+2. Set the Environment Variable that the compose file would need.
+export SNAPSHOT_RELEASE_VERSION=1.0.0-SNAPSHOT (on GitBash)
+docker-compose -f docker-compose-toll-platform-microservice.yml up  ->To run all the microservices

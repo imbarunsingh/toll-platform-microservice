@@ -2,6 +2,6 @@ FROM java:8
 VOLUME /toll-platform-app-store
 RUN mkdir /usr/local/toll-platform-app
 WORKDIR /usr/local/toll-platform-app
-COPY toll-platform-web-1.0.0-SNAPSHOT.jar .
+COPY toll-platform-web.jar .
 ENV JAVA_OPTS="-Xmx512M -Xss256K -Xmx512m"
-CMD java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar toll-platform-web-1.0.0-SNAPSHOT.jar 
+CMD java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar toll-platform-web.jar 

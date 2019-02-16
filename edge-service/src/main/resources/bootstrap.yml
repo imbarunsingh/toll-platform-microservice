@@ -10,8 +10,7 @@ spring:
       label: ${SPRING_CLOUD_CONFIG_LABEL:docker}   
       username: configServerUser #Basic Auth Credentials
       password: ${CONFIG_SERVER_USER_PASSWORD:GbVx74Gp6cmEQnUcyNQKcCVu5NUfpx5K}
-      fail-fast: true #Config Client Fail Fast
-      retry: #Config Client Retry
+      fail-fast: true #Config Client Fail Fast      
       retry: #Config Client Retry
         initial-interval: 5000
         max-attempts: 7
