@@ -1,0 +1,129 @@
+#Ensure that the docker-compose -f docker-compose-rabbitmq.yml is run before this docker compose file run
+#Service dependency is taken care since the application retries connection
+#SNAPSHOT_RELEASE_VERSION?err is basically the release/project version which is passed as a argument to this compose file at runtime
+version: '3.2'
+services:
+    rabbitmq-server:
+      container_name: spring-cloud-bus-rabbitmq   
+      image: rabbitmq:3-management 
+      ports:
+          - "5672:5672"
+          - "15672:15672"
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-rabbitmq         
+    config-service:
+      container_name: config-service      
+      image: "bsingh10/config-service:${SNAPSHOT_RELEASE_VERSION?err}" #${SNAPSHOT_RELEASE_VERSION:?err} exits with an error message containing err if SNAPSHOT_RELEASE_VERSION is unset or empty in the environment.
+      ports:
+        - "9090:9090"
+      environment: #Environment variables with only a key are resolved to their values(from .env in the same directory) on the machine Compose is running on, which can be helpful for secret or host-specific values
+        SPRING_PROFILES_ACTIVE:
+        JAVA_OPTS:
+        EUREKA_HOST:     
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-config-service                  
+    discovery-service:
+      container_name: discovery-service       
+      image: "bsingh10/discovery-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+          - "9091:9091"
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:       
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-discovery-service
+      depends_on:                 
+        - config-service           
+    edge-service:
+      container_name: edge-service
+      image: "bsingh10/edge-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+        - "8080:8080" 
+      environment:
+        SPRING_PROFILES_ACTIVE: 
+        EUREKA_HOST:   
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file                    
+    hystrix-dashboard-service:
+      container_name: hystrix-dashboard-service
+      image: "bsingh10/hystrix-dashboard-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+        - "9092:9092"
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:      
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file   
+    hystrix-turbine-service:
+      container_name: hystrix-turbine-service
+      image: "bsingh10/hystrix-turbine-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+        - "9093:9093"
+      environment:
+        SPRING_PROFILES_ACTIVE: 
+        EUREKA_HOST:     
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file           
+    toll-rate-service:
+      container_name: toll-rate-service
+      image: "bsingh10/toll-rate-service:${SNAPSHOT_RELEASE_VERSION?err}"      
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file
+    fast-pass-service:
+      container_name: fast-pass-service
+      image: "bsingh10/fast-pass-service:${SNAPSHOT_RELEASE_VERSION?err}"      
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file
+    toll-platform-web:
+      container_name: toll-platform-web
+      image: "bsingh10/toll-platform-web:${SNAPSHOT_RELEASE_VERSION?err}"      
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: json-file
+networks:
+    toll-platform-network:      
+      external: true     
