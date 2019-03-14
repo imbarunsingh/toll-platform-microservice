@@ -58,4 +58,20 @@ Run The Docker Compose :
 1. Set the Environment Variable that the compose file would need.
 export SNAPSHOT_RELEASE_VERSION=1.0.0-SNAPSHOT (on GitBash: When you run docker-compose up with this configuration, Compose looks for the SNAPSHOT_RELEASE_VERSION environment variable in the shell and substitutes its value in. For this example, Compose resolves the image to SNAPSHOT_RELEASE_VERSION before running the configuration.)
 
-docker-compose -f docker-compose-toll-platform-microservice.yml up  ->To run all the microservices
+docker-compose -f application-docker-compose.yml up  ->To run all the microservices
+
+NOTE: Update to the windows host file entry for hostname and ip of docker container for RabbitMQ container connection is NOT NEEDED. 
+
+Enabling Splunk Log with Docker:
+--------------------------------
+1. Run the splunk-docker-compose.yml
+docker-compose -f splunk-docker-compose.yml
+
+Login to Splunk Console and follow below:
+Settings -> Server Settings -> General Settings -> Enable SSL(HTTPS)
+
+Then Configure  the Splunk logging driver in docker-compose file.
+Run the application docker file:
+docker-compose -f application-docker-compose.yml up
+Now, check the splunk console for logs.
+Refer for more details : https://medium.com/@nanduni/container-monitoring-using-splunk-3a0971209a16

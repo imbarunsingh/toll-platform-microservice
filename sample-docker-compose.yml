@@ -1,0 +1,81 @@
+#Service dependency is taken care since the application retries connection
+#SNAPSHOT_RELEASE_VERSION?err is basically the release/project version which is passed as a argument to this compose file at runtime
+version: '3.2'
+services:
+    rabbitmq-server:
+      container_name: spring-cloud-bus-rabbitmq   
+      image: rabbitmq:3-management 
+      ports:
+          - "5672:5672"
+          - "15672:15672"
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-rabbitmq         
+    config-service:
+      container_name: config-service      
+      image: "bsingh10/config-service:${SNAPSHOT_RELEASE_VERSION?err}" #${SNAPSHOT_RELEASE_VERSION:?err} exits with an error message containing err if SNAPSHOT_RELEASE_VERSION is unset or empty in the environment.
+      ports:
+        - "9090:9090"
+      environment: #Environment variables with only a key are resolved to their values(from .env in the same directory) on the machine Compose is running on, which can be helpful for secret or host-specific values
+        SPRING_PROFILES_ACTIVE:
+        JAVA_OPTS:
+        EUREKA_HOST:     
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-config-service
+      logging:
+          driver: splunk
+          options:
+            splunk-token: "0f2a6553-dbbd-4e71-aa3d-132ad9352451" #Token for vksingh55@gmail.com splunk docker set up
+            splunk-url: "https://172.19.0.2:8088"
+            splunk-insecureskipverify: "true"
+            tag: "{{.ImageName}}/{{.Name}}/{{.ID}}"
+            labels: "${SPLUNK_LABEL?err}"                                   
+    discovery-service:
+      container_name: discovery-service       
+      image: "bsingh10/discovery-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+          - "9091:9091"
+      environment:
+        SPRING_PROFILES_ACTIVE:
+        EUREKA_HOST:       
+      networks:
+        toll-platform-network:
+          aliases:
+            - toll-platform-discovery-service
+      depends_on:                 
+        - config-service 
+      logging:
+          driver: splunk
+          options:
+            splunk-token: "0f2a6553-dbbd-4e71-aa3d-132ad9352451" #Token for vksingh55@gmail.com splunk docker set up
+            splunk-url: "https://172.19.0.2:8088"
+            splunk-insecureskipverify: "true"
+            tag: "{{.ImageName}}/{{.Name}}/{{.ID}}"
+            labels: "${SPLUNK_LABEL?err}"         
+    edge-service:
+      container_name: edge-service
+      image: "bsingh10/edge-service:${SNAPSHOT_RELEASE_VERSION?err}"
+      ports:
+        - "8080:8080" 
+      environment:
+        SPRING_PROFILES_ACTIVE: 
+        EUREKA_HOST:   
+      networks:
+        - toll-platform-network
+      depends_on:                     
+        - config-service          
+        - discovery-service
+      logging:
+          driver: splunk
+          options:
+            splunk-token: "0f2a6553-dbbd-4e71-aa3d-132ad9352451" #Token for vksingh55@gmail.com splunk docker set up
+            splunk-url: "https://172.19.0.2:8088"
+            splunk-insecureskipverify: "true"
+            tag: "{{.ImageName}}/{{.Name}}/{{.ID}}"
+            labels: "${SPLUNK_LABEL?err}"
+networks:
+    toll-platform-network:      
+      external: true     
