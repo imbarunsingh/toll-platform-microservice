@@ -62,8 +62,8 @@ docker-compose -f application-docker-compose.yml up  ->To run all the microservi
 
 NOTE: Update to the windows host file entry for hostname and ip of docker container for RabbitMQ container connection is NOT NEEDED. 
 
-Enabling Splunk Log with Docker:
---------------------------------
+Enabling Centralized Logging on Splunk with Docker :
+----------------------------------------------------
 1. Run the splunk-docker-compose.yml
 docker-compose -f splunk-docker-compose.yml
 

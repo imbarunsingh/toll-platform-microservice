@@ -158,7 +158,7 @@ services:
             labels: "${SPLUNK_LABEL?err}"
     toll-platform-web:
       container_name: toll-platform-web
-      image: "bsingh10/toll-platform-web:${SNAPSHOT_RELEASE_VERSION?err}"      
+      image: "bsingh10/toll-platform-web:${SNAPSHOT_RELEASE_VERSION?err}"    
       environment:
         SPRING_PROFILES_ACTIVE:
         EUREKA_HOST:
